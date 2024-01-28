@@ -81,19 +81,47 @@ function getHoursFromGameData(gameData) {
   return hours;
 }
 
+function createRowHoursElement(label, hours) {
+  const rowElement = document.createElement("div");
+  rowElement.classList.add("row");
+
+  const labelElement = document.createElement("div");
+  labelElement.classList.add("col");
+  labelElement.style = "font-weight: 600;";
+  labelElement.innerText = label;
+  rowElement.append(labelElement);
+
+  const hoursElement = document.createElement("div");
+  hoursElement.classList.add("col");
+  hoursElement.innerText = `${hours} hours`;
+  rowElement.append(hoursElement);
+
+  return rowElement;
+}
+
 function addHoursToGamePage(hours) {
   const gameDescription = document.querySelector(".game-info");
-  const hoursElement = document.createElement("div");
-  hoursElement.style = "background: rgba(37,41,51,.9); margin-bottom: 30px;";
-  const innerHtml = `
-        <div style="padding: 20px;">
-            <h4>How Long To Beat</h4>
-            <div class="row"><div class="col" style="font-weight: 600;">Main</div><div class="col">${hours.main} hours</div></div>
-            <div class="row"><div class="col" style="font-weight: 600;">Main + Extra</div><div class="col">${hours.extra} hours</div></div>
-            <div class="row"><div class="col" style="font-weight: 600;">Completionist</div><div class="col">${hours.completionist} hours</div></div>
-        </div>`;
-  hoursElement.innerHTML = innerHtml;
-  gameDescription.parentElement.insertBefore(hoursElement, gameDescription);
+
+  const hoursCardElement = document.createElement("div");
+  hoursCardElement.style = "background: rgba(37,41,51,.9); margin-bottom: 30px;";
+
+  const hoursCardContentElement = document.createElement("div");
+  hoursCardContentElement.style = "padding: 20px;";
+
+  const hoursCardTitleElement = document.createElement("h4");
+  hoursCardTitleElement.innerText = "How Long To Beat";
+  hoursCardContentElement.append(hoursCardTitleElement);
+
+  const mainHoursElement = createRowHoursElement("Main", hours.main);
+  const extraHoursElement = createRowHoursElement("Main + Extra", hours.extra);
+  const completionistHoursElement = createRowHoursElement("Completionist", hours.completionist);
+  hoursCardContentElement.append(mainHoursElement);
+  hoursCardContentElement.append(extraHoursElement);
+  hoursCardContentElement.append(completionistHoursElement);
+  
+  hoursCardElement.append(hoursCardContentElement);
+
+  gameDescription.parentElement.insertBefore(hoursCardElement, gameDescription);
 }
 
 function onLoadGameInfo(callback) {
