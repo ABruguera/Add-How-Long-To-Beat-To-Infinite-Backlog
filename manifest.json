@@ -3,6 +3,11 @@
   "name": "Add How Long To Beat to Infinite Backlog",
   "version": "1.0",
   "description": "Obtains the duration of a game from How Long To Beat and adds it to the game page on Infinite Backlog.",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "add-how-long-to-beat-to-infinite-backlog@bruguera.dev"
+    }
+  },
   "icons": {
     "48": "icons/icon-48.png"
   },
