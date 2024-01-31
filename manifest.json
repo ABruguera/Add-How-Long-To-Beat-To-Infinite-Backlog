@@ -29,6 +29,6 @@
   "permissions": [
     "webRequest",
     "webRequestBlocking",
-    "<all_urls>"
+    "https://howlongtobeat.com/api/search"
   ]
 }
